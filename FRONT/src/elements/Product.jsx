@@ -35,7 +35,7 @@ const Product = () => {
         setNumberPages(response.data.total_pages);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         toastr.error("Hubo un error al obtener los productos.");
         setLoading(false);
       });
