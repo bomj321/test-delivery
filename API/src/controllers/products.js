@@ -112,15 +112,28 @@ let controller = {
       // calculate offset
       const offset = (page - 1) * pageSize;
 
+      conn.query(`SELECT COUNT(*) FROM catalogue_products`, (err, rows) => {
+        if (err) return res.send(err);
+        var totalRow = rows;
+      });
+
       conn.query(
         `SELECT * FROM catalogue_products limit ${pageSize} OFFSET ${offset}`,
         (err, rows) => {
           if (err) return res.send(err);
-          res.json({
-            products_page_count: rows.length,
-            page_number: page,
-            products: rows,
-          });
+
+          conn.query(
+            `SELECT COUNT(*) as totalRows FROM catalogue_products`,
+            (err, count) => {
+              if (err) return res.send(err);
+              res.json({
+                products_page_count: rows.length,
+                total_pages: Math.ceil(count[0].totalRows / pageSize),
+                page_number: page,
+                products: rows,
+              });
+            }
+          );
         }
       );
     });
