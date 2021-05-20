@@ -1,6 +1,6 @@
 # Hi, I am José Ortega, this is a test for a Peruvian company
 
-This a MVP created with Node.js, React.js and Mysql
+This a MVP created with Node.js, Express, React.js and Mysql
 
 # Instructions
 
