@@ -1,28 +1,18 @@
 import React from "react";
 
-const ProductList = ({ rows }) => {
+const ProductList = ({ rows, buyProduct }) => {
   return (
     <>
       <div className="row">
         {rows.map((value, i) => (
-          <div className="col-lg-4 col-md-6 col-sm-6 col-12" key={i}>
+          <div
+            className="col-lg-4 col-md-6 col-sm-6 col-12"
+            key={i}
+            onClick={() => buyProduct(value)}
+          >
             <div className="blog blog-style--1">
               <div className="thumbnail">
                 <a href="/blog-details">
-                  {/*value.image ? (
-                    <img
-                      className="w-100"
-                      src={`${value.image}`}
-                      alt="Producto Images"
-                    />
-                  ) : (
-                    <img
-                      className="w-100"
-                      src={`/assets/images/blog/blog-01.jpg`}
-                      alt="Blog Images"
-                    />
-                  )*/}
-
                   <img
                     className="w-100"
                     src={`/assets/images/blog/blog-01.jpg`}

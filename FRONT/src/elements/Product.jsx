@@ -22,6 +22,7 @@ const Product = () => {
 
   const [numberPages, setNumberPages] = useState(1);
   const [page, setPage] = useState(1);
+  const [buyingProduct, setBuyingProduct] = useState(false);
 
   useEffect(() => {
     getProducts();
@@ -43,6 +44,28 @@ const Product = () => {
   const handleChange = (event, value) => {
     setPage(value);
     getProducts(value);
+  };
+
+  const buyProduct = (value) => {
+    if (value.stock === 0) {
+      toastr.error("Este producto no tiene stock");
+      return;
+    }
+
+    if (!buyingProduct) {
+      setBuyingProduct(true);
+      toastr.warning("Espere por favor");
+      ProductService.editProduct(value.id)
+        .then(() => {
+          toastr.clear();
+          setBuyingProduct(false);
+          toastr.success("Gracias por su compra.");
+          getProducts(page);
+        })
+        .catch(() => {
+          toastr.error("Hubo un error al comprar el producto.");
+        });
+    }
   };
 
   return (
@@ -72,7 +95,12 @@ const Product = () => {
           {/* Start Blog Area */}
           <div className="rn-blog-area ptb--120 bg_color--1">
             <div className="container">
-              {rows.length > 0 && <ProductList rows={rows} />}
+              {rows.length > 0 && (
+                <ProductList
+                  rows={rows}
+                  buyProduct={(value) => buyProduct(value)}
+                />
+              )}
               <div className="row mt--20">
                 <div className="col-lg-12 d-flex justify-content-center">
                   {/* Start Pagination Area */}

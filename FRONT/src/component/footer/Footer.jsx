@@ -17,8 +17,6 @@ class Footer extends Component {
               <div className="col-lg-6">
                 <div className="footer-right" data-black-overlay="6">
                   <div className="row">
-                    {/* Start Single Widget  */}
-
                     <div className="col-lg-12">
                       <div className="copyright-text">
                         <p>

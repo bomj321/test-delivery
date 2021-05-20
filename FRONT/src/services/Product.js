@@ -8,10 +8,9 @@ export default {
       url: `${environment.baseUrl}/products/${number}/${size}`,
     }),
 
-  editProduct: (data, id) =>
+  editProduct: (id) =>
     axios({
       method: "PUT",
-      url: `${environment.baseUrl}/update/${id}`,
-      data: data,
+      url: `${environment.baseUrl}/products/${id}`,
     }),
 };

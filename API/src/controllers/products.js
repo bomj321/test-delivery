@@ -3,79 +3,34 @@
 let validator = require("validator");
 let controller = {
   update: (req, res) => {
-    return res.status(200).send({
-      status: "success of success",
-    });
+    req.getConnection((err, conn) => {
+      if (err) throw err;
 
-    /* let userId = req.params.userId;
-    var params = req.body;
+      var productId = req.params.productId;
 
-    if (params.password) {
-      bcrypt.hash(params.password, null, null, (err, hash) => {
-        params.password = hash;
-        User.findOneAndUpdate(
-          {
-            _id: userId,
-          },
-          params,
-          {
-            new: true,
-          },
-          (err, userUpdated) => {
-            if (err) {
-              return res.status(500).send({
-                status: "error",
-                message: "Error al actualizar usuario",
+      conn.query(
+        `SELECT * FROM catalogue_products WHERE id = ${productId}`,
+        (err, row) => {
+          if (err) return res.send(err);
+
+          if (row.length > 0) {
+            var sql = `UPDATE catalogue_products SET stock = ${
+              row[0].stock - 1
+            } WHERE id = ${productId}`;
+            conn.query(sql, function (err, result) {
+              if (err) throw err;
+              res.json({
+                message: result.affectedRows + " record(s) updated",
               });
-            }
-
-            if (!userUpdated) {
-              return res.status(500).send({
-                status: "error",
-                message: "No se ha actualizado el usuario",
-              });
-            }
-
-            //Return response
-            return res.status(200).send({
-              status: "success",
-              user: userUpdated,
+            });
+          } else {
+            res.json({
+              message: "Sin registros",
             });
           }
-        );
-      }); // Close bcrypt
-    } else {
-      User.findOneAndUpdate(
-        {
-          _id: userId,
-        },
-        params,
-        {
-          new: true,
-        },
-        (err, userUpdated) => {
-          if (err) {
-            return res.status(500).send({
-              status: "error",
-              message: "Error al actualizar usuario",
-            });
-          }
-
-          if (!userUpdated) {
-            return res.status(500).send({
-              status: "error",
-              message: "No se ha actualizado el usuario",
-            });
-          }
-
-          //Return response
-          return res.status(200).send({
-            status: "success",
-            user: userUpdated,
-          });
         }
       );
-    }*/
+    });
   },
 
   getProducts: (req, res) => {
@@ -111,11 +66,6 @@ let controller = {
 
       // calculate offset
       const offset = (page - 1) * pageSize;
-
-      conn.query(`SELECT COUNT(*) FROM catalogue_products`, (err, rows) => {
-        if (err) return res.send(err);
-        var totalRow = rows;
-      });
 
       conn.query(
         `SELECT * FROM catalogue_products limit ${pageSize} OFFSET ${offset}`,
