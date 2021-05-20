@@ -4,6 +4,8 @@ This a MVP created with Node.js, React.js and Mysql
 
 # Instructions
 
+# Database
+
 You have a file called "catalogue_products.sql", this a the database with one table.
 
 # API
