@@ -15,4 +15,4 @@ To run the API, you need run "npm install" and before "npm run dev", to change t
 
 # Front
 
-To run the Front, you need run "npm install" and before "npm start", to change de connection to API you need edit the the environment.js file on libs folder
+To run the Front, you need run "npm install" and before "npm start", to change de connection to API you need edit the the environment.js file on libs folder. The front runs for default on port 3001
