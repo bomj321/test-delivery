@@ -15,7 +15,11 @@ const ProductList = ({ rows, buyProduct }) => {
                 <a href="/blog-details">
                   <img
                     className="w-100"
-                    src={`/assets/images/blog/blog-01.jpg`}
+                    src={
+                      value.image
+                        ? value.image
+                        : `/assets/images/blog/blog-01.jpg`
+                    }
                     alt="Blog Images"
                   />
                 </a>

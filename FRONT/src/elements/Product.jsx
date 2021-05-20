@@ -29,7 +29,7 @@ const Product = () => {
   }, []);
 
   const getProducts = (page = 1) => {
-    ProductService.getProducts(page, 5)
+    ProductService.getProducts(page, 6)
       .then((response) => {
         setRows(response.data.products);
         setNumberPages(response.data.total_pages);
