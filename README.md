@@ -11,6 +11,6 @@ You have a file called "catalogue_products.sql", this a the database with one ta
 To run the API, you need run "npm install" and before "npm run dev", to change the connection to database you need edit .env file. The api runs for default on port 8081
 
 
-# Front
+#Front
 
 To run the Front, you need run "npm install" and before "npm start", to change de connection to API you need edit the the environment.js file on libs folder
