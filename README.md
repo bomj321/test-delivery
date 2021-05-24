@@ -6,7 +6,7 @@ This a MVP created with Node.js, Express, React.js and Mysql
 
 # Database
 
-You have a file called "catalogue_products.sql", this a the database with one table.
+You have a file called "test-delivery.sql", this a the database with one table.
 
 # API
 
